@@ -1,19 +1,19 @@
-import logo from '../assets/logo.svg'
 import main from '../assets/main.svg'
 import styled from 'styled-components'
+import { Logo } from '../components'
 
 const Landing = () => {
   return (
     <StyleWrapper className="container">
       <nav className="navbar">
-        <img src={logo} alt="logo" />
+        <Logo />
       </nav>
       <div className="content">
-        <div className="2">
-          <h1 className="2">
+        <div>
+          <h1>
             Job <span>Find</span> App
           </h1>
-          <p className="2">
+          <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
             eveniet maxime nihil amet asperiores! Fuga consequuntur provident
             excepturi. Modi quos totam tempore ullam vitae nam ipsum architecto.
@@ -22,7 +22,7 @@ const Landing = () => {
           </p>
           <button className="btn">Login/Register</button>
         </div>
-        <div className={2}>
+        <div>
           <img src={main} alt="main" />
         </div>
       </div>
