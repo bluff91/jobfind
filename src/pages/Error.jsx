@@ -28,14 +28,12 @@ const Wrapper = styled.section`
 
   .img-container {
     margin-top: 20px;
-    height: 500px;
+  max-width:70%;
   }
 
   img {
-    
     width:100%;
-    height:100%;
-    object-fit: cover;
+    object-fit: contain;
   }
   h3 {
     margin: 0;
