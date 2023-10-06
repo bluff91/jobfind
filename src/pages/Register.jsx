@@ -1,81 +1,124 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import { Logo } from '../components'
+import { Logo, FormRow } from '../components'
 import { Link } from 'react-router-dom'
 
 const initialState = {
-  user: '',
+  name: '',
   password: '',
   email: '',
   isMember: true,
 }
 const Register = () => {
   const [registerValues, setRegisterValues] = useState(initialState)
-
-  const [password, setPassword] = useState('')
-  const [email, setEmail] = useState('')
-  console.log(registerValues)
-
-  function handleChange(e) {
-    console.log(e.target.value)
-    setRegisterValues(
-      registerValues.map((item) => {
-        if (item === e.target.name) {
-          return { ...registerValues }
-        } else {
-          return { ...registerValues }
-        }
-      })
-    )
+  console.log(registerValues.isMember)
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setRegisterValues({ ...registerValues, [name]: value })
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const { name, email, password, isMember } = registerValues
+    if (!password || !email || (!isMember && !name)) {
+      console.log('please complete all input fields')
+    } else {
+      console.log('SUBMITED')
+    }
   }
 
+  const toggleMember = () => {
+    setRegisterValues({ ...registerValues, isMember: !registerValues.isMember })
+    console.log(registerValues.isMember)
+  }
+
+  // const [password, setPassword] = useState('')
+  // const [email, setEmail] = useState('')
+  // console.log(registerValues)
+
+  // function handleChange(e) {
+  //   console.log(e.target.value)
+  //   setRegisterValues(
+  //     registerValues.map((item) => {
+  //       if (item === e.target.name) {
+  //         return { ...registerValues }
+  //       } else {
+  //         return { ...registerValues }
+  //       }
+  //     })
+  //   )
+  // }
+  // ({ type, name, value, handleChange, labelText })
+
   return (
-    <StyleWrapper>
-      <form className="form">
-        <div className="form-container">
-          <div className="title">
-            <Logo />
-            <h3 className="">Login</h3>
-          </div>
-          <label className="form-label">Email</label>
-          <input
-            className="form-input"
-            name="email"
+    <Wrapper className="full-page">
+      <form className="form" onSubmit={handleSubmit}>
+        <Logo />
+        <h3>{registerValues.isMember ? `Login` : `Register`}</h3>
+        {!registerValues.isMember && (
+          <FormRow
+            name="name"
             type="text"
-            value={email}
-            onChange={(e) => handleChange(e)}
+            value={registerValues.name}
+            handleChange={handleChange}
           />
-          <label className="form-label">Password</label>
-          <input
-            className="form-input"
-            name="password"
-            type="text"
-            value={password}
-            onChange={(e) => handleChange(e)}
-          />
-          <button type="button" className="btn">
-            Submit
+        )}
+        <FormRow
+          name="email"
+          type="email"
+          value={registerValues.email}
+          handleChange={handleChange}
+        />
+        <FormRow
+          name="password"
+          type="password"
+          value={registerValues.password}
+          handleChange={handleChange}
+        />
+
+        <button type="submit" className="btn btn-block">
+          Submit
+        </button>
+        <p>
+          {registerValues.isMember ? `Not a member yet?` : `Already a member?`}
+          <button type="button" className="member-btn" onClick={toggleMember}>
+            {registerValues.isMember ? `Register` : `Login`}
           </button>
-          <p>
-            Not a member yet ? <Link to="/">Register</Link>
-          </p>
-        </div>
+        </p>
       </form>
-    </StyleWrapper>
+    </Wrapper>
   )
 }
 
-const StyleWrapper = styled.section`
-  .form-container {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    button {
-      margin-top: 1rem;
-    }
-    p {
-      text-align: center;
-    }
+const Wrapper = styled.section`
+  display: grid;
+  align-items: center;
+  .logo {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1.38rem;
+  }
+  .form {
+    max-width: 400px;
+    border-top: 5px solid var(--primary-500);
+  }
+
+  h3 {
+    text-align: center;
+  }
+  p {
+    margin: 0;
+    margin-top: 1rem;
+    text-align: center;
+  }
+  .btn {
+    margin-top: 1rem;
+  }
+  .member-btn {
+    background: transparent;
+    border: transparent;
+    color: var(--primary-500);
+    cursor: pointer;
+    letter-spacing: var(--letterSpacing);
   }
 `
 
