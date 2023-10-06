@@ -5,7 +5,7 @@ import img from '../assets/imgs/error.jpg'
 const Error = () => {
   return (
     <Wrapper>
-      <div className='img-container'>
+      <div className="img-container">
         <img src={img} />
       </div>
       <div className="text-container">
@@ -18,21 +18,20 @@ const Error = () => {
 }
 
 const Wrapper = styled.section`
- 
   background-color: var(--grey-200);
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  
-
+  justify-items: center;
+  text-align: center;
   .img-container {
     margin-top: 20px;
-  max-width:70%;
+    max-width: 70%;
   }
 
   img {
-    width:100%;
+    width: 100%;
     object-fit: contain;
   }
   h3 {
@@ -41,6 +40,9 @@ const Wrapper = styled.section`
   }
   p {
     margin: 1rem 0;
+  }
+
+  @media (max-width: 912px) {
   }
 `
 export default Error

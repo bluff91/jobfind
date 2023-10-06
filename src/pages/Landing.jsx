@@ -41,7 +41,7 @@ const StyleWrapper = styled.div`
     color: var(--primary-500);
   }
   .content {
-    margin-top: 6rem;
+    margin-top: 4rem;
     display: flex;
     justify-content: center;
     align-items: center;
