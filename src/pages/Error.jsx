@@ -25,6 +25,7 @@ const Wrapper = styled.section`
   align-items: center;
   justify-items: center;
   text-align: center;
+
   .img-container {
     margin-top: 20px;
     max-width: 70%;

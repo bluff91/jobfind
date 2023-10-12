@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { Logo, FormRow } from '../components'
-import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const initialState = {
   name: '',
@@ -11,7 +11,6 @@ const initialState = {
 }
 const Register = () => {
   const [registerValues, setRegisterValues] = useState(initialState)
-  console.log(registerValues.isMember)
   const handleChange = (e) => {
     const { name, value } = e.target
     setRegisterValues({ ...registerValues, [name]: value })
@@ -20,15 +19,14 @@ const Register = () => {
     e.preventDefault()
     const { name, email, password, isMember } = registerValues
     if (!password || !email || (!isMember && !name)) {
-      console.log('please complete all input fields')
+      toast.error('please complete all input fields !')
     } else {
-      console.log('SUBMITED')
+      toast.success('SUBMITED')
     }
   }
 
   const toggleMember = () => {
     setRegisterValues({ ...registerValues, isMember: !registerValues.isMember })
-    console.log(registerValues.isMember)
   }
 
   // const [password, setPassword] = useState('')
