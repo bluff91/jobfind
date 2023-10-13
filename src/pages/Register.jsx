@@ -2,6 +2,8 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { Logo, FormRow } from '../components'
 import { toast } from 'react-toastify'
+import { useDispatch, useSelector } from 'react-redux'
+import { loginUser, registerUser } from '../features/user/userSlice'
 
 const initialState = {
   name: '',
@@ -11,6 +13,9 @@ const initialState = {
 }
 const Register = () => {
   const [registerValues, setRegisterValues] = useState(initialState)
+  const { isLoading, user } = useSelector((store) => store.user)
+  const dispatch = useDispatch()
+
   const handleChange = (e) => {
     const { name, value } = e.target
     setRegisterValues({ ...registerValues, [name]: value })
@@ -20,9 +25,13 @@ const Register = () => {
     const { name, email, password, isMember } = registerValues
     if (!password || !email || (!isMember && !name)) {
       toast.error('please complete all input fields !')
-    } else {
-      toast.success('SUBMITED')
+      return
     }
+    if (isMember) {
+      dispatch(loginUser({ email: email, password: password }))
+      return
+    }
+    dispatch(registerUser({ name, email, password }))
   }
 
   const toggleMember = () => {

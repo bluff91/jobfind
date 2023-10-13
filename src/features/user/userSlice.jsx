@@ -5,4 +5,18 @@ const initialState = { isLoading: false, user: null }
 
 const userSlice = createSlice({ name: 'user', initialState })
 
+export const registerUser = createAsyncThunk(
+  'user/registerUser',
+  async function (user, thunkAPI) {
+    console.log(`Register User ${JSON.stringify(user)}`)
+  }
+)
+
+export const loginUser = createAsyncThunk(
+  'login/loginUser',
+  async (user, thunkAPI) => {
+    console.log(`Login User: ${JSON.stringify(user)}`)
+  }
+)
+
 export default userSlice.reducer
