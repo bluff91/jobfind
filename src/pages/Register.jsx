@@ -4,6 +4,7 @@ import { Logo, FormRow } from '../components'
 import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUser, registerUser } from '../features/user/userSlice'
+import axios from 'axios'
 
 const initialState = {
   name: '',
@@ -20,6 +21,7 @@ const Register = () => {
     const { name, value } = e.target
     setRegisterValues({ ...registerValues, [name]: value })
   }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     const { name, email, password, isMember } = registerValues
